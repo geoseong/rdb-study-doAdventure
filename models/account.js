@@ -5,9 +5,9 @@ const tables = require('../db/tables');
 
 exports.addUser = function(req, res){
     console.log('/addUser', req.body);
-    var post = req.body;
+    var reqBody = req.body;
     dbconn.getCurrDB((db)=>{
-        dbconn.connDB[db].query('INSERT INTO ?? SET ?', [tables['user_manage_tbl'], post], function (error, results, fields) {
+        dbconn.connDB[db].query('INSERT INTO ?? SET ?', [tables['user_manage_tbl'], reqBody], function (error, results, fields) {
             if (error){
                 return res.send({'error': error});
             }
