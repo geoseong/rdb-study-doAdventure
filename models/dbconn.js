@@ -7,7 +7,7 @@ exports.addConn = function(req, res){
         db: req.body.d,
         usrid: req.body.i, usrpw: req.body.p
     };
-    dbconn.connMysql(account, (instance, err)=>{
+    dbconn.connectDB(account, (instance, err)=>{
         if(err){
             return res.send({'error': err})
         }
@@ -21,7 +21,7 @@ exports.disConn = function(req, res){
     var account = {
         db: req.body.d
     };
-    dbconn.disconnMysql(account, (err)=>{
+    dbconn.disconnectDB(account, (err)=>{
         if(err){
             return res.send({'error': err})
         }

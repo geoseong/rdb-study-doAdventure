@@ -1,16 +1,19 @@
 'use strict';
 
 const mysql = require('mysql');
+const dbProp = require('../.prop/props').db;
+
 const dbinstance = {};
 var currDB;
 
-exports.connMysql = (param, callback) => {
+const connMysql = (param, callback) => {
+    console.log('[connMysql] param', param);
     dbinstance[param.db] = mysql.createConnection({
-        host     : 'jopark.c0lay90wlcej.ap-northeast-2.rds.amazonaws.com',
-        user     : param.usrid,
-        password : param.usrpw,
-        port     : '3306',
-        database : 'joparkdb'
+        host     : dbProp[param.db].host,
+        user     : dbProp[param.db].user,
+        password : dbProp[param.db].password,
+        port     : dbProp[param.db].port,
+        database : dbProp[param.db].database,
     });
     dbinstance[param.db].connect((err, packet) => {
         if (err) {
@@ -22,7 +25,8 @@ exports.connMysql = (param, callback) => {
         return callback(dbinstance, null);
     });
 }
-exports.disconnMysql = (param, callback) => {
+const disconnMysql = (param, callback) => {
+    console.log('[disconnMysql] param', param);
     dbinstance[param.db].end(function(err) {
         if (err) {
             console.error('Database disconn failed: ' + err.stack);
@@ -33,6 +37,29 @@ exports.disconnMysql = (param, callback) => {
         return callback();
     });
 }
+
+exports.connectDB = (param, callback) => {
+    console.log('[connectDB] param', param);
+    switch (param.db){
+        case 'mysql':
+            connMysql(param, callback);
+            break;
+        default:
+            connMysql(param, callback);
+    }
+}
+exports.disconnectDB = (param, callback) => {
+    console.log('[connectDB] param', param);
+    switch (param.db){
+        case 'mysql':
+            disconnMysql(param, callback);
+            break;
+        default:
+            disconnMysql(param, callback);
+    }
+}
+
+
 exports.getCurrDB = (callback)=>{
     callback(currDB);
 }
