@@ -52,12 +52,12 @@
     ```
     - 응답
     ```
-        {'resp': results}
+    {'resp': results}
     ```
 - 로그인 : POST /account/login
 
 
-## 서버 응답형식
+## 서버 공통 응답 형식
 - 정상 리턴 :  
 {"resp" : [Object]}
 - 에러 리턴 :  
