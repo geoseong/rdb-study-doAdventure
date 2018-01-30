@@ -6,6 +6,20 @@ const dbProp = require('../.prop/props').db;
 const dbinstance = {};
 var currDB;
 
+exports.connPool = (param, callback) => {
+    console.log('[connPool] param', param);
+    dbinstance[param.db] = mysql.createPool({
+        connectionLimit : 2,
+        host     : dbProp[param.db].host,
+        user     : dbProp[param.db].user,
+        password : dbProp[param.db].password,
+        port     : dbProp[param.db].port,
+        database : dbProp[param.db].database,
+    });
+    console.log('[mysql-pool]Connected to database pool.');
+    return callback(dbinstance, null);
+}
+
 const connMysql = (param, callback) => {
     console.log('[connMysql] param', param);
     dbinstance[param.db] = mysql.createConnection({

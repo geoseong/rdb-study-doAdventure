@@ -1,11 +1,12 @@
 'use strict';
 const dbconn = require('../db/conn');
+const prop = require('../.prop/props');
 
 exports.addConn = function(req, res){
     console.log('/addconn req', req.body);
     var account = {
         db: req.body.d,
-        usrid: req.body.i, usrpw: req.body.p
+        // usrid: req.body.i, usrpw: req.body.p
     };
     dbconn.connectDB(account, (instance, err)=>{
         if(err){

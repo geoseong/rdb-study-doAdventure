@@ -33,6 +33,51 @@ app.get('/', (req, res) => {
     res.send({'resp': 'Connection is working well'});
 });
 
+/** DB Connection Pool Practice **/
+app.get('/dbpool', (req, res) => {
+    dbconn.connPool({db: 'mysql'}, (instance, err)=>{
+        console.log('instance mysql', instance.mysql.config);   //13881
+        console.log('error?', err);
+        dbconn.connDB['mysql'].query('SELECT * FROM user_manage_tbl', (error, results, fields) => {
+            res.header('Content-type','application/json');
+            res.send({'results': results });
+            // res.send(instance.mysql);
+        });
+    })
+});
+app.get('/dbpoolquerydirect', (req, res) => {
+    // 13886
+    dbconn.connDB['mysql'].query('SELECT * FROM user_manage_tbl', (error, results, fields) => {
+        res.header('Content-type','application/json');
+        res.send({'results': results });
+        // res.send(instance.mysql);
+    });
+});
+
+app.get('/dbpoolquerymulti', (req, res) => {
+    // 13886
+    dbconn.connDB['mysql'].getConnection((err, connection) => {
+        console.log('[dbpoolquerymulti]err', err);
+        console.log('[dbpoolquerymulti]connection', connection);
+        connection.query('SELECT * FROM user_manage_tbl', (error, results, fields) => {
+            res.header('Content-type','application/json');
+            res.send({'results': results });
+        });
+    });
+});
+
+app.get('/dbpoolrelease', (req, res) => {
+    // 13886
+    dbconn.connDB['mysql'].getConnection((err, connection) => {
+        console.log('[dbpoolquerymulti]err', err);
+        console.log('[dbpoolquerymulti]connection', connection);
+        connection.release();
+        res.header('Content-type','application/json');
+        res.send({'results': 'yeah' });
+    });
+});
+/** end of DB Connection Pool Practice **/
+
 // Express 오류 처리
 function logErrors(err, req, res, next) {
     console.error(err.stack);
