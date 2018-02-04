@@ -3,7 +3,7 @@ const dbconn = require('../db/conn');
 const queries = require('../db/queries');
 const tables = require('../db/tables');
 
-exports.addUser = function(req, res){
+exports.addUser = (req, res) => {
     console.log('/addUser', req.body);
     var reqBody = req.body;
     dbconn.getCurrDB((db)=>{
@@ -22,18 +22,14 @@ exports.login = function(req, res){
 };
 
 /* for test */
-exports.query = function(req, res){
+exports.query = (req, res) => {
     console.log('/query', req.body);
-    dbconn.getCurrDB((db)=>{
-        console.log('getCurrDB', db);
-        dbconn.connDB[db].query(queries.select['user_manage_tbl'], function (error, results, fields) {
-            if (error) {
-                console.error('[connection.query]error: ' + error);
-                return res.send({'error': error});
-            }
-            console.log('[connection.query]results', results);
-            return res.send({'resp': results});
-        });
-    })
-
+    dbconn.connDB['mysql'].query(queries.select['user_manage_tbl'], function (error, results, fields) {
+        if (error) {
+            console.error('[connection.query]error: ' + error);
+            return res.send({'error': error});
+        }
+        // console.log('[connection.query]results', results);
+        return res.send({'resp': results});
+    });
 };

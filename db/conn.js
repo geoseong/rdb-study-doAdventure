@@ -9,7 +9,7 @@ var currDB;
 exports.connPool = (param, callback) => {
     console.log('[connPool] param', param);
     dbinstance[param.db] = mysql.createPool({
-        connectionLimit : 2,
+        connectionLimit : 1,
         host     : dbProp[param.db].host,
         user     : dbProp[param.db].user,
         password : dbProp[param.db].password,
@@ -17,7 +17,8 @@ exports.connPool = (param, callback) => {
         database : dbProp[param.db].database,
     });
     console.log('[mysql-pool]Connected to database pool.');
-    return callback(dbinstance, null);
+    currDB = param.db;
+    return callback(dbinstance[param.db], null);
 }
 
 const connMysql = (param, callback) => {

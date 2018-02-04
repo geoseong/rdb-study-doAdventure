@@ -1,8 +1,7 @@
 'use strict';
 const dbconn = require('../db/conn');
-const prop = require('../.prop/props');
 
-exports.addConn = function(req, res){
+exports.addConn = (req, res) => {
     console.log('/addconn req', req.body);
     var account = {
         db: req.body.d,
@@ -17,7 +16,7 @@ exports.addConn = function(req, res){
     });
 };
 
-exports.disConn = function(req, res){
+exports.disConn = (req, res) => {
     console.log('/disconn req', req.body);
     var account = {
         db: req.body.d
