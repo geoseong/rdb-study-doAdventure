@@ -106,8 +106,8 @@ show processlist;
 Connection 수 확인하기
 ```
 show status like 'Threads_connected';
-
 ```
+
 동작중인 Connection 수 확인하기
 ```
 show status like 'Threads_running';
