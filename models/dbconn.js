@@ -1,13 +1,13 @@
 'use strict';
 const dbconn = require('../db/conn');
 
-exports.addConn = function(req, res){
+exports.addConn = (req, res) => {
     console.log('/addconn req', req.body);
     var account = {
         db: req.body.d,
-        usrid: req.body.i, usrpw: req.body.p
+        // usrid: req.body.i, usrpw: req.body.p
     };
-    dbconn.connMysql(account, (instance, err)=>{
+    dbconn.connectDB(account, (instance, err)=>{
         if(err){
             return res.send({'error': err})
         }
@@ -16,12 +16,12 @@ exports.addConn = function(req, res){
     });
 };
 
-exports.disConn = function(req, res){
+exports.disConn = (req, res) => {
     console.log('/disconn req', req.body);
     var account = {
         db: req.body.d
     };
-    dbconn.disconnMysql(account, (err)=>{
+    dbconn.disconnectDB(account, (err)=>{
         if(err){
             return res.send({'error': err})
         }

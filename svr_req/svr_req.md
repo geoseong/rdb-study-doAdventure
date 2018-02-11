@@ -33,7 +33,7 @@
     {"resp":`disconnected`}
     ```
 
-- 회원가입 : POST /account/addUser
+- (v) 회원가입 : POST /account/addUser
     - 요청
     ```
     {
