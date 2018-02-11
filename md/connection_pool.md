@@ -113,6 +113,7 @@ show status like 'Threads_connected';
 show status like 'Threads_running';
 ```
 SET SESSION auto_increment_increment=1
+
 	- Session 함수에 대해서 변수 정의하는 구문임.
 	- SHOW SESSION VARIABLES 로 정의된 변수값을 확인할 수 있다.
 	- 확인해 보니 'auto_increment_increment' 라는 변수는 기본적으로 정의되어있는 변수였다.
