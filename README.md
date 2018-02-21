@@ -5,9 +5,12 @@
 - DB : `MySQL`
 - 사용 DB 드라이버 : `mysql` [https://www.npmjs.com/package/mysql](https://www.npmjs.com/package/mysql)
 
-## Markdown
-- [서버요청문](./md/svr_req.md)
-- [게임 시연 순서](./md/game_test.md)
+## 서버요청문
+- [서버요청문](./plan/svr_req.md)
+
+## 메모
+- [게임 시연 순서](./memo/game_test.md)
 
 ## Study
-- [DB Connection Pool](./md/connection_pool.md)
+- [DB Connection Pool](./memo/connection_pool.md)
+- [알게된 것 & 연구](./memo/studied.md)
